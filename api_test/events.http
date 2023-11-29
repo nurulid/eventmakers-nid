@@ -1,0 +1,35 @@
+### List Events //JUDUL
+
+GET https://eventmakers-api.vercel.app/api/events
+// NGGAK PAKE BODY
+
+
+### List Single Event
+
+GET https://eventmakers-api.vercel.app/api/events/5bbb5985-f900-4c88-8b57-783d8db5e3eb
+// NGGAK PAKE BODY
+
+
+### Create Event
+
+POST https://eventmakers-api.vercel.app/api/events
+
+{
+    "name": "Devscale Batch 3 Meet Up",
+    "description": "nurul testing",
+    "location": "online dulu",
+    "date": "kapan ya",
+    "authorId": "bb521684-5f99-4817-b0d0-afc84d56178f"
+}
+
+
+### Join Event
+
+POST https://eventmakers-api.vercel.app/api/join-events
+
+{
+    "name": "Nurul",
+    "email": "nurul@test.com",
+    "phone": "0893333333",
+    "eventId": "5bbb5985-f900-4c88-8b57-783d8db5e3eb"
+}
