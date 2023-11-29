@@ -1,0 +1,8 @@
+### Login User //JUDUL
+
+POST https://eventmakers-api.vercel.app/api/auth/login
+
+{
+    "email": "nurul@test.com",
+    "password": "123456"
+}
