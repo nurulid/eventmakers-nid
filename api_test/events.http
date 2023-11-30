@@ -6,7 +6,7 @@ GET https://eventmakers-api.vercel.app/api/events
 
 ### List Single Event
 
-GET https://eventmakers-api.vercel.app/api/events/5bbb5985-f900-4c88-8b57-783d8db5e3eb
+GET https://eventmakers-api.vercel.app/api/events/:id
 // NGGAK PAKE BODY
 
 
