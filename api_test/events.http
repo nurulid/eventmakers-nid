@@ -3,8 +3,10 @@
 GET https://eventmakers-api.vercel.app/api/events
 // NGGAK PAKE BODY
 
+### List Events by User ID
+GET https://eventmakers-api.vercel.app/api/events?userid=bb521684-5f99-4817-b0d0-afc84d56178f
 
-### List Single Event
+### Single Event
 
 GET https://eventmakers-api.vercel.app/api/events/:id
 // NGGAK PAKE BODY
