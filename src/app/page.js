@@ -13,7 +13,7 @@ export default async function Home() {
       <div className="py-6 sm:py-10 px-4 sm:px-20 text-center">
         <p className="mb-3 font-semibold text-yellow-600">EventMakers</p>
         <h1 className="text-5xl sm:text-[5rem] font-serif font-bold leading-tight">
-          Let's Join The Event You Want. GO!
+          Let's Join The Event You Want
         </h1>
       </div>
 
