@@ -7,6 +7,10 @@
         @apply h-full;
     }
 
+    body {
+        @apply text-black;
+    }
+
     /* To make the footer stay at the bottom despite there's not enough content */
     /* Not sure from where these div come */
     body > div[data-overlay-container="true"] {

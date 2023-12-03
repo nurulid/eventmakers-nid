@@ -12,7 +12,7 @@ export const EventCreate = () => {
   const [eventLocation, setEventLocation] = useState("");
   const [eventDate, setEventDate] = useState("");
 
-  async function createEvent() {
+  async function handleCreateEvent() {
     const res = await fetch("https://eventmakers-api.vercel.app/api/events", {
       method: "POST",
       headers: {
@@ -66,7 +66,7 @@ export const EventCreate = () => {
         label="Event date"
         onChange={(e) => setEventDate(e.target.value)}
       />
-      <Button className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full" isDisabled={loading} onClick={createEvent}>
+      <Button className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full" isDisabled={loading} onClick={handleCreateEvent}>
         Add event
       </Button>
     </div>
