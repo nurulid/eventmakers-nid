@@ -1,3 +1,5 @@
+import DashboardLayout from "@/components/template/DashboardLayout";
+
 export default function Layout({ children }) {
-  return <div>{children}</div>;
+  return <DashboardLayout>{children}</DashboardLayout>;
 }
