@@ -3,8 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Input } from "@nextui-org/react";
+import { useUser } from "@/components/auth/hooks/useUser";
+import toast from "react-hot-toast";
 
 export const EventCreate = () => {
+  const { user } = useUser();
+  const userId = user?.id;
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [eventName, setEventName] = useState("");
@@ -23,23 +27,23 @@ export const EventCreate = () => {
         description: eventDescription,
         location: eventLocation,
         date: eventDate,
-        authorId: "bb521684-5f99-4817-b0d0-afc84d56178f", // TODO: CHANGE TO DINAMIC USERID
+        authorId: userId, // TODO: CHANGE TO DINAMIC USERID :DONE
       }),
     });
     const data = await res.json();
 
     if (!data) {
       setLoading(false);
-      console.log("Error -..-"); // TODO: CHANGE PAKE TOAST
+      toast.error("Error -..-"); // TODO: CHANGE PAKE TOAST :DONE
       return;
     }
 
-    setLoading(false);
-    console.log("Event created successfully!"); // TODO: CHANGE PAKE TOAST
-    setEventName(""); 
-    setEventDescription("");
-    setEventLocation("");
-    setEventDate("");
+    setLoading(true);
+    toast.success("Event created successfully!"); // TODO: CHANGE PAKE TOAST :DONE
+    // setEventName(""); 
+    // setEventDescription("");
+    // setEventLocation("");
+    // setEventDate("");
     router.refresh();
     setTimeout(() => router.push("/dashboard/events"), 1000);
     // console.log(data);
@@ -66,7 +70,7 @@ export const EventCreate = () => {
         label="Event date"
         onChange={(e) => setEventDate(e.target.value)}
       />
-      <Button className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full" isDisabled={loading} onClick={handleCreateEvent}>
+      <Button isLoading={loading} className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full" onClick={handleCreateEvent}>
         Add event
       </Button>
     </div>

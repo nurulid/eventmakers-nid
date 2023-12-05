@@ -24,7 +24,6 @@ export const useLogin = () => {
   }
 
   async function handleSubmitLogin() {
-    // Problem ada di backend
     setLoading(true);
     const { email, password } = loginData;
     const res = await fetch(`${API_URL}/login`, {
@@ -36,6 +35,11 @@ export const useLogin = () => {
     });
     const data = await res.json();
     Cookies.set("token", data.token);
+    Cookies.set("id", data.data.id);
+    // Cookies.set("name", data.data.name);
+    // Cookies.set("role", data.data.role);
+    localStorage.setItem("userdata", JSON.stringify(data.data))
+    // console.log(data);
 
     if (!data) {
       setLoading(false);

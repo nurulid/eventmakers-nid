@@ -17,17 +17,17 @@
         @apply h-full; 
     }
 
-    body > div[data-overlay-container="true"] > div {
-        @apply h-full; 
-    }
+    /* a {
+        @apply text-yellow-600 no-underline hover:underline;
+    } */
 }
 
 @layer components {
     .link {
-        @apply hover:text-gray-500 transition-all;
+        @apply hover:text-yellow-600 transition-all;
     }
     .btn-link {
-        @apply bg-black hover:bg-gray-800 text-white px-4 py-3 rounded-full transition-all;
+        @apply bg-black hover:bg-yellow-600 text-white px-4 py-3 rounded-full transition-all;
     }
 
     .avatar {
