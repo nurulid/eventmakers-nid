@@ -1,10 +1,8 @@
 import ListEvents from "@/components/events/components/ListEvents";
-import { Header } from "@/components/Header";
 
 export default function Page() {
   return (
     <>
-      {/* <Header name={payload.name} role={payload.role} /> */}
       <div className="py-6 md:py-10 px-4 md:px-20 mb-16 text-center">
         <p className="mb-3 font-semibold text-yellow-600">EventMakers</p>
         <h1 className="text-5xl md:text-[5rem] px-0 md:px-10 font-serif font-bold leading-tight mb-4">

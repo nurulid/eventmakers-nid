@@ -13,7 +13,7 @@ export default async function middleware(request) {
   //   return NextResponse.rewrite(new URL("/", request.nextUrl));
   // }
 
-  //Ada atau Tidak const
+  //Ada atau Tidak
   //verifikasi token
   const token = request.cookies.get("token")?.value;
   // console.log(token);

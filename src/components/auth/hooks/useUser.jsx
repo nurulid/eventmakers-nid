@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 export const useUser = () => {
   const [user, setUser] = useState(null);
 
+    // store userData yang di localStorage ke sini, biar bisa digunakan di client component **untuk penggunaan di server component pake cookies**
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userdata"));
+    const userData = JSON.parse(localStorage.getItem("userData"));
     setUser(userData);
-}, []);
+  }, []);
 
-return { user };
+  return { user };
 };

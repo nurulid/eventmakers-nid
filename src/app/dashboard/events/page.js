@@ -2,7 +2,6 @@ import { EventCard } from "@/components/events/components/EventCard";
 import { cookies } from "next/headers";
 
 async function getMyEvents() {
-  // TODO: CHANGE THE STATIC USERID :DONE
   const cookieStore = cookies();
   const userId = cookieStore.get("id").value;
   // console.log(userId);

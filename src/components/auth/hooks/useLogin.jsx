@@ -38,7 +38,7 @@ export const useLogin = () => {
     Cookies.set("id", data.data.id);
     // Cookies.set("name", data.data.name);
     // Cookies.set("role", data.data.role);
-    localStorage.setItem("userdata", JSON.stringify(data.data))
+    localStorage.setItem("userData", JSON.stringify(data.data))
     // console.log(data);
 
     if (!data) {

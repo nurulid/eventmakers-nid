@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useUser } from "@/components/auth/hooks/useUser";
+import { useLogout } from "./auth/hooks/useLogout";
+import { Button } from "@nextui-org/react";
 
 export const Header = () => {
   const { user } = useUser();
+  const { handleLogout } = useLogout();
   const isUser = user?.role === "USER";
 
   return (
@@ -17,9 +20,9 @@ export const Header = () => {
           <div className="space-x-4">
             {isUser ? (
               <>
-                <Link href={"/"} className="link">
+                <Button onClick={handleLogout} className="link">
                   Log out
-                </Link>
+                </Button>
                 <Link href={"/dashboard"} className="btn-link">
                   Dashboard
                 </Link>
