@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html, body {
+        @apply h-full;
+    }
+
+    body {
+        @apply text-black;
+    }
+
+    /* To make the footer stay at the bottom despite there's not enough content */
+    /* Not sure from where these div come */
+    body > div[data-overlay-container="true"] {
+        @apply h-full; 
+    }
+
+    /* a {
+        @apply text-yellow-600 no-underline hover:underline;
+    } */
+}
+
+@layer components {
+    .link {
+        @apply hover:text-yellow-600 transition-all;
+    }
+    .btn-link {
+        @apply bg-black hover:bg-yellow-600 text-white px-4 py-3 rounded-full transition-all;
+    }
+
+    .avatar {
+        @apply uppercase w-[40px] h-[40px] text-sm bg-gray-300 rounded-full text-center leading-[40px] text-white shadow-medium;
+    }
+
+    .flex .avatar:not(:first-child) {
+        margin-left: -15px;
+    }
+
+    .arrow {
+        border: solid black;
+        border-width: 0 8px 8px 0;
+        display: inline-block;
+        padding: 8px;
+    }
+    
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+}
