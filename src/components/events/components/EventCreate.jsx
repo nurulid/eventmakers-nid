@@ -19,13 +19,16 @@ export const EventCreate = () => {
   });
 
   const handleEventChange = (e) => {
+    const {name, value} = e.target; // decluter or shorthand
     setEvent({
       ...event,
-      [e.target.name]: e.target.value,
+      // [e.target.name]: e.target.value, 
+      [name]: value,
     });
   };
 
   async function handleCreateEvent() {
+    setLoading(true);
     const { name, description, location, date } = event;
     const res = await fetch("https://eventmakers-api.vercel.app/api/events", {
       method: "POST",
@@ -48,7 +51,7 @@ export const EventCreate = () => {
       return;
     }
 
-    setLoading(true);
+    setLoading(false);
     toast.success("Event created successfully!");
     setEvent("");
     router.refresh();
@@ -56,27 +59,32 @@ export const EventCreate = () => {
     // console.log(data);
   }
   return (
-    <div className="space-y-5 max-w-[500px] mx-auto">
-      <Input name="name" label="Event name" onChange={handleEventChange} />
-      <Input
-        name="description"
-        label="Event description"
-        onChange={handleEventChange}
-      />
-      <Input
-        name="location"
-        label="Event location"
-        onChange={handleEventChange}
-      />
-      <Input name="date" label="Event date" onChange={handleEventChange} />
-      <Button
-        isLoading={loading}
-        isDisabled={loading}
-        className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full"
-        onClick={handleCreateEvent}
-      >
-        Add event
-      </Button>
-    </div>
+    <>
+      <h1 className="text-4xl mb-7 text-center">
+        Fill this form to create your event
+      </h1>
+      <div className="space-y-5 max-w-[500px] mx-auto">
+        <Input name="name" label="Event name" onChange={handleEventChange} />
+        <Input
+          name="description"
+          label="Event description"
+          onChange={handleEventChange}
+        />
+        <Input
+          name="location"
+          label="Event location"
+          onChange={handleEventChange}
+        />
+        <Input name="date" label="Event date" onChange={handleEventChange} />
+        <Button
+          className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full"
+          isLoading={loading}
+          isDisabled={loading}
+          onClick={handleCreateEvent}
+        >
+          Add event
+        </Button>
+      </div>
+    </>
   );
 };

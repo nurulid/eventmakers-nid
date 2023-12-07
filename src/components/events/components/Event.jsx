@@ -8,14 +8,29 @@ import toast from "react-hot-toast";
 import { useUser } from "@/components/auth/hooks/useUser";
 
 export const Event = ({ eventData }) => {
-  const isParticipants = eventData.participants.length > 0;
+  const { user } = useUser();
+  const isUser = user?.role === "USER";
+  const participants = eventData.participants;
+  const isParticipants = participants.length > 0;
   // const bodyEl = document.body;
   const router = useRouter();
+  // const [banned, setBanned] = useState(eventData.isBanned);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userPhone, setUserPhone] = useState("");
+  const [joinEvent, setJoinEvent] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleJoinChange = (e) => {
+    const { name, value } = e.target;
+    setJoinEvent({
+      ...joinEvent,
+      // [e.target.name]: e.target.value
+      [name]: value,
+    });
+  };
 
   // console.log(userName);
 
@@ -27,6 +42,8 @@ export const Event = ({ eventData }) => {
   // });
 
   async function handleJoinEvent() {
+    setLoading(true);
+    const { name, email, phone } = joinEvent;
     const res = await fetch(
       "https://eventmakers-api.vercel.app/api/join-events",
       {
@@ -35,9 +52,9 @@ export const Event = ({ eventData }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: userName,
-          email: userEmail,
-          phone: userPhone,
+          name,
+          email,
+          phone,
           eventId: eventData.id,
         }),
       }
@@ -50,19 +67,39 @@ export const Event = ({ eventData }) => {
       return;
     }
 
-    setLoading(true);
+    setLoading(false);
     toast.success("Join event successfully!");
-    // setUserName("");
-    // setUserEmail("");
-    // setUserPhone("");
+    setJoinEvent("");
     setIsOpen(false); // closed join form popup
     router.refresh();
     setTimeout(() => router.push("/events/invitation"), 1000);
     // console.log(data);
   }
 
+  // async function handleBanned() {
+  //   if (!banned === true) {
+  //     setBanned(false);
+  //   } else {
+  //     setBanned(true);
+  //   }
+
+  //   const res = await fetch("https://eventmakers-api.vercel.app/api/events", {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       id: eventData.id,
+  //       isBanned: !banned,
+  //     }),
+  //   });
+  //   const data = await res.json();
+  //   console.log(data);
+  //   router.refresh();
+  // }
+
   return (
-    <div id="body" className="relative">
+    <div className="relative">
       {/* Single Event */}
       <div>
         <div className="p-8 mb-10 bg-gray-100 rounded-xl">
@@ -92,6 +129,17 @@ export const Event = ({ eventData }) => {
           </div>
 
           <div className="space-y-6 px-0 sm:px-5">
+            {/* {isUser ? (
+              <h3
+                onClick={handleBanned}
+                className="text-2xl text-center font-bold text-blue-600"
+              >
+                <span className={banned ? "text-red-700" : ""}>
+                  BAN THIS EVENT
+                </span>
+              </h3>
+            ) : null} */}
+
             <div className="p-6 border border-gray-200 rounded-xl text-center space-y-6">
               <div className="text-2xl font-semibold">Are you interest?</div>
               <Button
@@ -149,29 +197,30 @@ export const Event = ({ eventData }) => {
               </p>
               <div className="space-y-5">
                 <Input
-                  value={userName}
+                  name="name"
                   variants="bordered"
                   color="warning"
                   label="Name"
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={handleJoinChange}
                 />
                 <Input
                   type="email"
-                  value={userEmail}
+                  name="email"
                   color="warning"
                   label="Email"
-                  onChange={(e) => setUserEmail(e.target.value)}
+                  onChange={handleJoinChange}
                 />
                 <Input
-                  value={userPhone}
+                  name="phone"
                   color="warning"
                   label="Phone"
-                  onChange={(e) => setUserPhone(e.target.value)}
+                  onChange={handleJoinChange}
                 />
               </div>
               <Button
                 className="bg-black py-6 rounded-full text-white shadow-lg text-md font-semibold w-full"
                 isLoading={loading}
+                isDisabled={loading}
                 onClick={handleJoinEvent}
               >
                 Join
